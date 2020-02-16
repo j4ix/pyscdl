@@ -7,7 +7,6 @@ import traceback
 import eyed3
 
 
-# test commit
 client_id = "Ud2k52mOdIEuIAUogCnrcqEgJOKrcIbv"
 url = "https://soundcloud.com/j4ix"
 genre_default = u"Dubstep"
