@@ -11,7 +11,7 @@ client_id = "Ud2k52mOdIEuIAUogCnrcqEgJOKrcIbv"
 url = "https://soundcloud.com/j4ix"
 genre_default = u"Dubstep"
 track_numbers = True
-cat_size = 24
+cat_size = 200
 path = os.path.basename(url)
 logfile = path + ".log"
 os_illegal_chars = '\\/:*?"<>|'
@@ -90,7 +90,7 @@ try:
                             "&client_id=" + client_id, "cat")
         return data
 
-    def progressive():
+    def get_url():
         for j in range(len(transcode)):
             if transcode[j]["format"]["protocol"] == "progressive":
                 return transcode[j]["url"]
@@ -165,9 +165,10 @@ try:
                 continue
             transcode = track["media"]["transcodings"]
             permalink = track["permalink_url"]
-            progressive = progressive()
+            progressive = get_url()
             if not progressive:
                 track_error(permalink)
+                continue
             url = progressive + "?client_id=" + client_id
             url = get_data(url, "api")["url"]
             log(permalink + " -> " + url, "dow")
