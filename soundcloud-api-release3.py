@@ -41,8 +41,7 @@ def log(message, status):
     if status == "usr" or status == "cat":
         message = "[" + status + "]" + message
     else:
-        message = "[" + status + "][" + \
-            str(count) + "][" + str(i) + "]" + message
+        message = "[" + status + "][" + str(count) + "][" + str(i) + "]" + message
     print(color + message + "\033[0m")
     with open(logfile, "a") as f:
         f.write(message + "\n")
@@ -78,16 +77,10 @@ try:
                 continue
             return r
 
-    def track_error(url): return log(
-        'something went wrong with "' + url + '", skipping...', "oof")
+    def track_error(url): return log('something went wrong with "' + url + '", skipping...', "oof")
 
     def metadata():
         api = get_data(track["uri"] + "?client_id=" + client_id, "api")
-        if api["artwork_url"]:
-            image_url = api["artwork_url"].replace("large", "t500x500")
-        else:
-            image_url = api["user"]["avatar_url"].replace("large", "t500x500")
-        image = get_data(image_url, "img").content
         meta = eyed3.load(target)
         meta.initTag((2, 3, 0))
         if "-" in api["title"]:
@@ -108,28 +101,31 @@ try:
             meta.tag.comments.set(api["description"])
         if api["genre"]:
             genre = api["genre"]
-        else:
+        elif genre_default:
             genre = genre_default
         if genre:
-            meta.tag.genre = genre
             meta.tag.setTextFrame("TCON", genre)
             log(genre, "inf")
         meta.tag.payment_url = api["permalink_url"]
         if api["release_year"]:
             meta.tag.recording_date = eyed3.core.Date(api["release_year"])
         else:
-            meta.tag.recording_date = eyed3.core.Date(
-                int(api["created_at"].split("/", 1)[0]))
+            meta.tag.recording_date = eyed3.core.Date(int(api["created_at"].split("/", 1)[0]))
         if track_numbers:
             meta.tag.track_num = count
-        meta.tag.images.set(3, image, "image/jpeg", "Cover")
+        if api["artwork_url"]:
+            image_url = api["artwork_url"].replace("large", "t500x500")
+        elif api["user"]["avatar_url"]:
+            image_url = api["user"]["avatar_url"].replace("large", "t500x500")
+        if image_url:
+            image = get_data(image_url, "img").content
+            meta.tag.images.set(3, image, "image/jpeg", "Cover")
         return meta.tag.save()
 
     api = "https://api.soundcloud.com/resolve?url=" + url + "&client_id=" + client_id
     user_id = str(get_data(api, "usr")["id"])
     # https://api-v2.soundcloud.com/users/210604704/likes?limit=1&client_id=Ud2k52mOdIEuIAUogCnrcqEgJOKrcIbv
-    api2 = get_data("https://api-v2.soundcloud.com/users/" + user_id +
-                    "/likes?limit=" + str(cat_size) + "&client_id=" + client_id, "cat")
+    api2 = get_data("https://api-v2.soundcloud.com/users/" + user_id + "/likes?limit=" + str(cat_size) + "&client_id=" + client_id, "cat")
 
     count = 0
     while True:
@@ -156,11 +152,9 @@ try:
             if not progressive:
                 track_error(permalink)
                 continue
-            url = track["media"]["transcodings"][progressive]["url"] + \
-                "?client_id=" + client_id
+            url = track["media"]["transcodings"][progressive]["url"] + "?client_id=" + client_id
             url = get_data(url, "api")["url"]
-            log("[" + str(count) + "][" + str(i) + "]" +
-                permalink + " -> " + url, "dow")
+            log(permalink + " -> " + url, "dow")
             with requests.get(url, stream=True) as r:
                 with open(target, "wb") as f:
                     for chunk in r.iter_content(chunk_size=32*1024):
