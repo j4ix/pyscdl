@@ -77,6 +77,22 @@ try:
                 continue
             return r
 
+    def load_hrefs():
+        data = []
+        api2 = get_data("https://api-v2.soundcloud.com/users/" + user_id + "/likes?limit=" + str(cat_size) + "&client_id=" + client_id, "cat")
+        while True:
+            data.append(api2)
+            if not api2["next_href"]:
+                break
+            api2 = get_data(api2["next_href"] + "&client_id=" + client_id, "cat")
+        return data
+
+    def progressive():
+        for j in range(len(transcode)):
+            if transcode[j]["format"]["protocol"] == "progressive":
+                return transcode[j]["url"]
+        return None
+
     def track_error(url): return log('something went wrong with "' + url + '", skipping...', "oof")
 
     def metadata():
@@ -125,34 +141,28 @@ try:
     api = "https://api.soundcloud.com/resolve?url=" + url + "&client_id=" + client_id
     user_id = str(get_data(api, "usr")["id"])
     # https://api-v2.soundcloud.com/users/210604704/likes?limit=1&client_id=Ud2k52mOdIEuIAUogCnrcqEgJOKrcIbv
-    api2 = get_data("https://api-v2.soundcloud.com/users/" + user_id + "/likes?limit=" + str(cat_size) + "&client_id=" + client_id, "cat")
 
     count = 0
-    while True:
-        for i in range(len(api2["collection"])):
-            progressive = False
-            if "track" not in api2["collection"][i]:
+    for x in load_hrefs():
+        for i in range(len(x["collection"])):
+            if "track" not in x["collection"][i]:
                 log("unsupported data type, skipping...", "inf")
                 continue
             count += 1
-            track = api2["collection"][i]["track"]
+            track = x["collection"][i]["track"]
             target = track["title"]
-            for x in os_illegal_chars:
-                target = target.replace(x, "")
+            for y in os_illegal_chars:
+                target = target.replace(y, "")
             target = os.path.join(path, target.strip() + ".mp3")
             if os.path.isfile(target):
-                log("track fucking exists", "inf")
+                log('"' + track["title"] + '" fucking exists already...', "inf")
                 continue
             transcode = track["media"]["transcodings"]
-            for j in range(len(transcode)):
-                if transcode[j]["format"]["protocol"] == "progressive":
-                    progressive = j
-                    break
             permalink = track["permalink_url"]
+            progressive = progressive()
             if not progressive:
                 track_error(permalink)
-                continue
-            url = track["media"]["transcodings"][progressive]["url"] + "?client_id=" + client_id
+            url = progressive + "?client_id=" + client_id
             url = get_data(url, "api")["url"]
             log(permalink + " -> " + url, "dow")
             with requests.get(url, stream=True) as r:
@@ -162,9 +172,5 @@ try:
                             f.write(chunk)
                             f.flush()
             metadata()
-            del(progressive)
-        if not api2["next_href"]:
-            break
-        api2 = get_data(api2["next_href"] + "&client_id=" + client_id, "cat")
 except (Exception, KeyboardInterrupt):
     stacktrace()
