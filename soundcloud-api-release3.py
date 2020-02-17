@@ -41,7 +41,8 @@ def log(message, status):
     if status == "usr" or status == "cat":
         message = "[" + status + "]" + message
     else:
-        message = "[" + status + "][" + str(count) + "][" + str(i) + "]" + message
+        message = "[" + status + "][" + \
+            str(count) + "][" + str(i) + "]" + message
     print(color + message + "\033[0m")
     with open(logfile, "a") as f:
         f.write(message + "\n")
@@ -79,12 +80,14 @@ try:
 
     def load_hrefs():
         data = []
-        api2 = get_data("https://api-v2.soundcloud.com/users/" + user_id + "/likes?limit=" + str(cat_size) + "&client_id=" + client_id, "cat")
+        api2 = get_data("https://api-v2.soundcloud.com/users/" + user_id +
+                        "/likes?limit=" + str(cat_size) + "&client_id=" + client_id, "cat")
         while True:
             data.append(api2)
             if not api2["next_href"]:
                 break
-            api2 = get_data(api2["next_href"] + "&client_id=" + client_id, "cat")
+            api2 = get_data(api2["next_href"] +
+                            "&client_id=" + client_id, "cat")
         return data
 
     def progressive():
@@ -93,7 +96,8 @@ try:
                 return transcode[j]["url"]
         return None
 
-    def track_error(url): return log('something went wrong with "' + url + '", skipping...', "oof")
+    def track_error(url): return log(
+        'something went wrong with "' + url + '", skipping...', "oof")
 
     def metadata():
         api = get_data(track["uri"] + "?client_id=" + client_id, "api")
@@ -126,7 +130,8 @@ try:
         if api["release_year"]:
             meta.tag.recording_date = eyed3.core.Date(api["release_year"])
         else:
-            meta.tag.recording_date = eyed3.core.Date(int(api["created_at"].split("/", 1)[0]))
+            meta.tag.recording_date = eyed3.core.Date(
+                int(api["created_at"].split("/", 1)[0]))
         if track_numbers:
             meta.tag.track_num = count
         if api["artwork_url"]:
@@ -155,7 +160,8 @@ try:
                 target = target.replace(y, "")
             target = os.path.join(path, target.strip() + ".mp3")
             if os.path.isfile(target):
-                log('"' + track["title"] + '" fucking exists already...', "inf")
+                log('"' + track["title"] +
+                    '" fucking exists already...', "inf")
                 continue
             transcode = track["media"]["transcodings"]
             permalink = track["permalink_url"]
