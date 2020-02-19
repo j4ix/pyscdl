@@ -100,7 +100,7 @@ try:
         'something went wrong with "' + url + '", skipping...', "oof")
 
     def metadata():
-        api = get_data(track["uri"] + "?client_id=" + client_id, "api")
+        api = get_data(track["uri"] + "?client_id=" + client_id, 'api')
         meta = eyed3.load(target)
         meta.initTag((2, 3, 0))
         if "-" in api["title"]:
@@ -125,7 +125,7 @@ try:
             genre = genre_default
         if genre:
             meta.tag.setTextFrame("TCON", genre)
-            log(genre, "inf")
+            log(genre, 'inf')
         meta.tag.payment_url = api["permalink_url"]
         if api["release_year"]:
             meta.tag.recording_date = eyed3.core.Date(api["release_year"])
@@ -139,45 +139,51 @@ try:
         elif api["user"]["avatar_url"]:
             image_url = api["user"]["avatar_url"].replace("large", "t500x500")
         if image_url:
-            image = get_data(image_url, "img").content
+            image = get_data(image_url, 'img').content
             meta.tag.images.set(3, image, "image/jpeg", "Cover")
         return meta.tag.save()
 
     api = "https://api.soundcloud.com/resolve?url=" + url + "&client_id=" + client_id
-    user_id = str(get_data(api, "usr")["id"])
+    user_id = str(get_data(api, 'usr')["id"])
     # https://api-v2.soundcloud.com/users/210604704/likes?limit=1&client_id=Ud2k52mOdIEuIAUogCnrcqEgJOKrcIbv
 
     count = 0
-    for x in load_hrefs():
-        for i in range(len(x["collection"])):
-            if "track" not in x["collection"][i]:
-                log("unsupported data type, skipping...", "inf")
-                continue
-            count += 1
-            track = x["collection"][i]["track"]
-            target = track["title"]
-            for y in os_illegal_chars:
-                target = target.replace(y, "")
-            target = os.path.join(path, target.strip() + ".mp3")
-            if os.path.isfile(target):
-                log('"' + track["title"] +
-                    '" fucking exists already...', "inf")
-                continue
-            transcode = track["media"]["transcodings"]
-            permalink = track["permalink_url"]
-            progressive = get_url()
-            if not progressive:
-                track_error(permalink)
-                continue
-            url = progressive + "?client_id=" + client_id
-            url = get_data(url, "api")["url"]
-            log(permalink + " -> " + url, "dow")
-            with requests.get(url, stream=True) as r:
-                with open(target, "wb") as f:
-                    for chunk in r.iter_content(chunk_size=32*1024):
-                        if chunk:
-                            f.write(chunk)
-                            f.flush()
-            metadata()
+    for x in reversed(load_hrefs()):
+        for i in range(len(x["collection"]) - 1, -1, -1):
+            while True:
+                try:
+                    if "track" not in x["collection"][i]:
+                        log("unsupported data type, skipping...", 'inf')
+                        break
+                    count += 1
+                    track = x["collection"][i]["track"]
+                    target = track["title"]
+                    for y in os_illegal_chars:
+                        target = target.replace(y, "")
+                    target = os.path.join(path, target.strip() + ".mp3")
+                    if os.path.isfile(target):
+                        log('"' + track["title"] +
+                            '" fucking exists already...', 'inf')
+                        break
+                    log('downloading "' + track['title'] + '"...', 'inf')
+                    transcode = track["media"]["transcodings"]
+                    permalink = track["permalink_url"]
+                    progressive = get_url()
+                    if not progressive:
+                        track_error(permalink)
+                        break
+                    url = progressive + "?client_id=" + client_id
+                    url = get_data(url, 'api')["url"]
+                    log(permalink + " -> " + url, 'dow')
+                    with requests.get(url, stream=True) as r:
+                        with open(target, "wb") as f:
+                            for chunk in r.iter_content(chunk_size=32*1024):
+                                if chunk:
+                                    f.write(chunk)
+                                    f.flush()
+                    metadata()
+                    break
+                except Exception:
+                    log("UNHANDLED EXCEPTION, RETRYING...", 'oop')
 except (Exception, KeyboardInterrupt):
     stacktrace()
