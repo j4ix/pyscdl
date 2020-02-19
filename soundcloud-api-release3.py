@@ -1,5 +1,3 @@
-#!/bin/python3
-
 import os
 import sys
 import requests
@@ -44,7 +42,7 @@ def log(message, status):
         message = "[" + status + "][" + \
             str(count) + "][" + str(i) + "]" + message
     print(color + message + "\033[0m")
-    with open(logfile, "a") as f:
+    with open(logfile, "a", encoding="utf_8") as f:
         f.write(message + "\n")
     return None
 
@@ -176,7 +174,7 @@ try:
                     url = get_data(url, 'api')["url"]
                     log(permalink + " -> " + url, 'dow')
                     with requests.get(url, stream=True) as r:
-                        with open(target, "wb") as f:
+                        with open(target, "wb", encoding="utf_8") as f:
                             for chunk in r.iter_content(chunk_size=32*1024):
                                 if chunk:
                                     f.write(chunk)
@@ -185,5 +183,6 @@ try:
                     break
                 except Exception:
                     log("UNHANDLED EXCEPTION, RETRYING...", 'oop')
+                    stacktrace()
 except (Exception, KeyboardInterrupt):
     stacktrace()
