@@ -174,7 +174,7 @@ try:
                     url = get_data(url, 'api')["url"]
                     log(permalink + " -> " + url, 'dow')
                     with requests.get(url, stream=True) as r:
-                        with open(target, "wb", encoding="utf_8") as f:
+                        with open(target, "wb") as f:
                             for chunk in r.iter_content(chunk_size=32*1024):
                                 if chunk:
                                     f.write(chunk)
