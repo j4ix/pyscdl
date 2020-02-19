@@ -58,7 +58,7 @@ open(logfile, "w").close()
 try:
     def get_data(url, status):
         log(url, status)
-        for j in range(4):
+        for i in range(4):
             try:
                 r = requests.get(url)
                 if status != "img":
@@ -68,7 +68,7 @@ try:
             except KeyboardInterrupt:
                 stacktrace()
             except Exception:
-                if j == 3:
+                if i == 3:
                     track_error(url)
                     return None
                 log('something went wrong with "' +
@@ -89,9 +89,9 @@ try:
         return data
 
     def get_url():
-        for j in range(len(transcode)):
-            if transcode[j]["format"]["protocol"] == "progressive":
-                return transcode[j]["url"]
+        for i in range(len(transcode)):
+            if transcode[i]["format"]["protocol"] == "progressive":
+                return transcode[i]["url"]
         return None
 
     def track_error(url): return log(
