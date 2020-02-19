@@ -148,7 +148,7 @@ try:
     count = 0
     for x in reversed(load_hrefs()):
         for i in range(len(x["collection"]) - 1, -1, -1):
-            while True:
+            for j in range(4):
                 try:
                     if "track" not in x["collection"][i]:
                         log("unsupported data type, skipping...", 'inf')
@@ -182,6 +182,9 @@ try:
                     metadata()
                     break
                 except Exception:
+                    if j == 3:
+                        log("i give up", 'oof')
+                        stacktrace()
                     log("UNHANDLED EXCEPTION, RETRYING...", 'oop')
                     stacktrace()
 except (Exception, KeyboardInterrupt):
