@@ -3,13 +3,13 @@ import sys
 from requests import get
 
 url = "j4ix"
-client_id = "PgKFRG98vbasF0IWR0AuZ09A4TgDnwk1"
+cid = "PgKFRG98vbasF0IWR0AuZ09A4TgDnwk1"
 output = "."
 
 illegal = '\\/:*?"<>|'
 
 
-cid = "client_id=" + client_id
+cid = "client_id=" + cid
 api = "https://api-v2.soundcloud.com/resolve?url=https://soundcloud.com/" + \
     url + "&" + cid
 uid = str(get(api).json()['id'])
