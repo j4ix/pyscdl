@@ -13,3 +13,4 @@ then change the values in `catalogupdater.py` and run it, it shall give you all 
 obviously it won't be perfect but that's because the people creating the tracks aren't
 you'll have to go back in with itunes and fix some of them but it gets very close
 it's a very successful and handy script and i've done a lot of testing on it recently
+
