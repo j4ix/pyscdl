@@ -19,7 +19,7 @@ api = "https://api-v2.soundcloud.com/resolve?url=https://soundcloud.com/" + \
     url + "&" + cid
 uid = str(get(api).json()["id"])
 likes = "https://api-v2.soundcloud.com/users/" + \
-    uid + "/track_likes?limit=200&" + cid
+    uid + "/track_likes?limit=100&" + cid
 print("fetching likes list...")
 r = get(likes).json()
 data = []
