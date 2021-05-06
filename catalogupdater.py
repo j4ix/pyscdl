@@ -5,7 +5,7 @@ from requests import get
 
 url = "j4ix"
 cid = "dmDh7QSlmGpzH9qQoH1YExYCGcyYeYYC"
-output = "c:/users/j4ix/music"
+output = "%userprofile%/music"
 do_meta = True
 genre_default = "Dubstep"
 
