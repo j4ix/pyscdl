@@ -5,10 +5,10 @@ import eyed3
 from requests import get
 
 
-url = "j4ix"
 cid = "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx"
-output_dir = "."
-default_genre = ""
+url = "j4ix"
+output_dir = "c:/users/j4ix/music"
+default_genre = "Dubstep"
 do_meta = True
 
 illegal_os_chars = '\\/:*?"<>|'
@@ -33,6 +33,8 @@ while True:
     print(working)
     r = get(working).json()
 
+if not output_dir:
+    output_dir = "."
 if not os.path.exists(output_dir):
     os.mkdir(output_dir)
 
