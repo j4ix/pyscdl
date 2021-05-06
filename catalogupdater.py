@@ -6,12 +6,12 @@ from requests import get
 
 
 url = "j4ix"
-cid = "dmDh7QSlmGpzH9qQoH1YExYCGcyYeYYC"
-output = "."
+cid = "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx"
+output_dir = "."
+genre_default = ""
 do_meta = True
-genre_default = "Dubstep"
 
-illegal = '\\/:*?"<>|'
+os_illegal_chars = '\\/:*?"<>|'
 
 
 
@@ -33,8 +33,8 @@ while True:
     print(working)
     r = get(working).json()
 
-if not os.path.exists(output):
-    os.mkdir(output)
+if not os.path.exists(output_dir):
+    os.mkdir(output_dir)
 
 
 def get_prog():
@@ -45,13 +45,13 @@ def get_prog():
 
 
 def fix(fix_title):
-    for i in illegal:
+    for i in os_illegal_chars:
         fix_title = fix_title.replace(i, "")
-    path = os.path.join(output, fix_title + ".mp3")
+    path = os.path.join(output_dir, fix_title + ".mp3")
     if os.path.isfile(path):
         print("REMOVING OLD FORMAT " + path)
         os.remove(path)
-    path = os.path.join(output, fix_title.strip() + ".mp3")
+    path = os.path.join(output_dir, fix_title.strip() + ".mp3")
     if os.path.isfile(path):
         print("REMOVING OLD FORMAT " + path)
         os.remove(path)
@@ -112,9 +112,9 @@ for x in reversed(data):
         artist = track["user"]["username"].strip()
         title = track["title"].strip()
     target = artist + " - " + title
-    for i in illegal:
+    for i in os_illegal_chars:
         target = target.replace(i, "")
-    path = os.path.join(output, target + ".mp3")
+    path = os.path.join(output_dir, target + ".mp3")
     if os.path.isfile(path):
         # if do_meta:
         #metadata(artist, title)
