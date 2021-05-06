@@ -7,8 +7,8 @@ from requests import get
 
 url = "j4ix"
 cid = "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx"
-output_dir = "."
-genre_default = ""
+output_dir = "c:/users/j4ix/music"
+default_genre = "Dubstep"
 do_meta = True
 
 os_illegal_chars = '\\/:*?"<>|'
@@ -75,8 +75,8 @@ def metadata(artist, title):
 
     if track["genre"]:
         genre = track["genre"]
-    elif genre_default:
-        genre = genre_default
+    elif default_genre:
+        genre = default_genre
 
     if genre:
         meta.setTextFrame("TCON", genre)
