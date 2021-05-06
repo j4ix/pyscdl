@@ -2,6 +2,7 @@
 im pretty sure this isnt a good thing
 
 but in case you care it runs in python3 so go download that
+AND ADD IT TO YOUR PATH OR YOU CAN'T GET TO IT, LOOK FOR THE CHECKBOX AT THE BEGINNING OF THE INSTALLATION OF PYTHON3
 and the main file here is `catalogupdater.py`
 ## shit requires **`requests`** and **`eyed3`** go get that too
 install it with
