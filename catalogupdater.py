@@ -7,11 +7,11 @@ from requests import get
 
 url = "j4ix"
 cid = "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx"
-output_dir = "c:/users/j4ix/music"
-default_genre = "Dubstep"
+output_dir = "."
+default_genre = ""
 do_meta = True
 
-os_illegal_chars = '\\/:*?"<>|'
+illegal_os_chars = '\\/:*?"<>|'
 
 
 
@@ -45,7 +45,7 @@ def get_prog():
 
 
 def fix(fix_title):
-    for i in os_illegal_chars:
+    for i in illegal_os_chars:
         fix_title = fix_title.replace(i, "")
     path = os.path.join(output_dir, fix_title + ".mp3")
     if os.path.isfile(path):
@@ -112,7 +112,7 @@ for x in reversed(data):
         artist = track["user"]["username"].strip()
         title = track["title"].strip()
     target = artist + " - " + title
-    for i in os_illegal_chars:
+    for i in illegal_os_chars:
         target = target.replace(i, "")
     path = os.path.join(output_dir, target + ".mp3")
     if os.path.isfile(path):
