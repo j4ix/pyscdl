@@ -7,7 +7,7 @@ from requests import get
 
 url = "j4ix"
 cid = "dmDh7QSlmGpzH9qQoH1YExYCGcyYeYYC"
-output = ""
+output = "."
 do_meta = True
 genre_default = "Dubstep"
 
