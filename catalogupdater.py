@@ -7,8 +7,8 @@ from requests import get
 
 cid = "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx"
 url = "j4ix"
-output_dir = "c:/users/j4ix/music"
-default_genre = "Dubstep"
+output_dir = "."
+default_genre = ""
 do_meta = True
 
 illegal_os_chars = '\\/:*?"<>|'
