@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import os
 import eyed3
 from requests import get
@@ -5,7 +7,7 @@ from requests import get
 
 url = "j4ix"
 cid = "dmDh7QSlmGpzH9qQoH1YExYCGcyYeYYC"
-output = "%userprofile%/music"
+output = ""
 do_meta = True
 genre_default = "Dubstep"
 
