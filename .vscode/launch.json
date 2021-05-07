@@ -5,10 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Build & Launch",
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "pyscdl: Launch",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/catalogupdater.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "exe: Build & Launch",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/catalogupdaterexe.py",
             "console": "internalConsole",
             "args": [
                 "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx",
@@ -19,10 +33,10 @@
             "preLaunchTask": "${defaultBuildTask}"
         },
         {
-            "name": "Python: Current File",
+            "name": "exe: Launch Only",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/catalogupdater.py",
+            "program": "${workspaceFolder}/catalogupdaterexe.py",
             "console": "integratedTerminal",
             "args": [
                 "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx",
