@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/dist/catalogupdater.exe",
-            "console": "integratedTerminal",
+            "console": "internalConsole",
             "args": [
                 "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx",
                 "j4ix",
