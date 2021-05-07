@@ -42,7 +42,7 @@ next(args)
 for i in range(len(sys.argv) - 1):
     if i == 0:
         cid = next(args)
-        #testmagic
+        # testmagic
         if len(cid) != 32:
             help()
     if i == 1:
