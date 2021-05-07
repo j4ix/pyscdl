@@ -8,7 +8,7 @@
 # Local History for Visual Studio Code
 .history/
 
-build/catalogupdater/*
+
 dist/catalogupdaterexe/*
 *.jpg
 *.mp3
