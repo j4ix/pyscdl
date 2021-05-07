@@ -8,7 +8,7 @@
             "name": "Build & Launch",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/dist/catalogupdater.exe",
+            "program": "${workspaceFolder}/catalogupdater.py",
             "console": "internalConsole",
             "args": [
                 "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx",
@@ -22,7 +22,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}/catalogupdater.py",
             "console": "integratedTerminal",
             "args": [
                 "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx",
