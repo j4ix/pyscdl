@@ -5,12 +5,31 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Build & Launch",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/dist/catalogupdater.exe",
+            "console": "integratedTerminal",
+            "args": [
+                "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx",
+                "j4ix",
+                "${env:USERPROFILE}/music",
+                "Dubstep"
+            ],
+            "preLaunchTask": "${defaultBuildTask}"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx", "j4ix", "c:/users/j4ix/music", "Dubstep"]
+            "args": [
+                "Mx2TehYCr804EIo6LQ7OARjZpWjMdVOx",
+                "j4ix",
+                "${env:USERPROFILE}/music",
+                "Dubstep"
+            ]
         }
     ]
 }

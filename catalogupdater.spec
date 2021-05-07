@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['C:\\Users\\j4ix\\Documents\\pyscdl\\catalogupdaterexe.py'],
+a = Analysis(['C:\\Users\\j4ix\\Documents\\pyscdl/catalogupdaterexe.py'],
              pathex=['C:\\Users\\j4ix\\Documents\\pyscdl'],
              binaries=[],
              datas=[],
