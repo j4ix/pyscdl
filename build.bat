@@ -1,0 +1,1 @@
+pyinstaller -F -i NONE "C:\Users\j4ix\Documents\pyscdl\catalogupdaterexe.py"
