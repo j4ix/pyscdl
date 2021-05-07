@@ -79,6 +79,8 @@ def metadata(artist, title):
         genre = track["genre"]
     elif default_genre:
         genre = default_genre
+    else:
+        genre = None
 
     if genre:
         meta.setTextFrame("TCON", genre)
