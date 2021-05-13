@@ -8,7 +8,8 @@
 # Local History for Visual Studio Code
 .history/
 
-
+build/
+dist/
 package/
 *.jpg
 *.mp3
