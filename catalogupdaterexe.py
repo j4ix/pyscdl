@@ -90,6 +90,7 @@ def get_prog():
     return None
 
 
+"""
 def fix(fix_title):
     for i in illegal_os_chars:
         fix_title = fix_title.replace(i, "")
@@ -101,6 +102,7 @@ def fix(fix_title):
     if os.path.isfile(path):
         print("REMOVING OLD FORMAT " + path)
         os.remove(path)
+"""
 
 
 def metadata(artist, title):

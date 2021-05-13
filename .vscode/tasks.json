@@ -20,6 +20,18 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "osx",
+            "type": "shell",
+            "command": "pyinstaller",
+            "args": [
+                "-F",
+                "-n",
+                "catalogupdater",
+                "-i",
+                ""
+            ]
         }
     ]
 }

@@ -1,4 +1,4 @@
-::  pyscdl v1.1
+::  pyscdl v1.3
 ::
 ::  usage: catalogupdater.exe [-h] <cid> <url> [output_dir] [default_genre] [do_meta]
 ::
