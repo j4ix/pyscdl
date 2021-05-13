@@ -22,9 +22,9 @@ install the latest python3 now
 
 once that's done install `eyed3` and `requests`
 
-> pip install eyed3
+> `pip install eyed3`
 
-> pip install requests
+> `pip install requests`
 
 #### then
 
