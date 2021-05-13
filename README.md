@@ -5,7 +5,7 @@ this thing downloads mp3s from soundcloud with the most detailed metadata in the
 
 ## extracting client id from soundcloud
 
-in order to make this program work, you need to obtain a 32char string called a client-id from the exchange between your computer and soundcloud's servers. it's not that hard. in order to do this, open a new tab in your browser, hit `F12` and open the `Network` tab. then go to soundcloud's website and pay attention to the network log. you should see links in there that contain `api`. if not, filter by it. once you find one, click on it and copy the `client_id` value into the example batch file script provided. everytime the script fails to run, give it a new token by repeating this process start to finish.
+in order to make this program work, you need to obtain a 32char string called a `client_id` from the exchange between your computer and soundcloud's servers. it's not that hard. in order to do this, open a new tab in your browser, hit `F12` and open the `Network` tab. then go to soundcloud's website and pay attention to the network log. you should see links in there that contain `api`. if not, filter by it. once you find one, click on it and copy the `client_id` value into the example batch file script provided. everytime the script fails to run, give it a new token by repeating this process start to finish.
 
 ### windows
 
