@@ -12,8 +12,8 @@ oauth_nonce = quote_plus("uescauxPYwsAYX4qrjs2YFe8LjbJKGMX")
 oauth_timestamp = 1621719971
 oauth_signature = quote_plus("vB/GsHnAmM0tzn6xeLSVa4HulWU=")
 url = "https://audiomack.com/andrekrynski/playlist/juice-wrld"
-output_dir = "c:/users/j4ix/documents/testdirectory"
-default_genre = ""
+output_dir = "."
+default_genre = "rap"
 do_meta = True
 
 illegal_os_chars = '\\/:*?"<>|'
