@@ -76,14 +76,11 @@ def metadata():
         else:
             artist = track["uploader"]["name"].strip()
             title = track["title"].strip()
-        title = track["title"].split('[')[0].strip()
-        artist = artist.split(")")[-1].strip()
-        artist = artist.split("]")[-1].strip()
     else:
-        title = track["title"]
-        artist = track["artist"]
+        title = track["title"].strip()
+        artist = track["artist"].strip()
 
-    meta.artist = track["artist"]
+    meta.artist = artist
     meta.title = title
     meta.album = artist + ' - ' + title
 
