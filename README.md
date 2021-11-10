@@ -1,7 +1,5 @@
 # pyscdl
-im pretty sure this isnt a good thing
-
-this thing downloads mp3s from soundcloud with the most detailed metadata in the best way.
+this doesn't work anymore
 
 ## extracting client id from soundcloud
 
